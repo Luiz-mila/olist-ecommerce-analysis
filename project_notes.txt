@@ -1,0 +1,296 @@
+================================================================================
+OLIST E-COMMERCE DATA ANALYSIS - PROJECT NOTES
+================================================================================
+Author: Luiz Milaré
+Date: January 2026
+Location: France
+================================================================================
+
+PROJECT OVERVIEW
+================================================================================
+This project analyzes 100,000+ real e-commerce transactions from Brazilian 
+marketplace Olist using SQL (MySQL) and Python (Pandas, Matplotlib, Seaborn).
+
+Goal: Demonstrate proficiency in data analysis, SQL querying, data 
+visualization, and business insight generation for opportunities 
+in Europe 
+
+================================================================================
+TECHNICAL STACK
+================================================================================
+- Database: MySQL 8.0
+- Language: Python 3.11
+- Libraries: pandas, matplotlib, seaborn, sqlalchemy, mysql-connector-python
+- IDE: VS Code + Jupyter Notebook
+- Version Control: Git + GitHub
+
+================================================================================
+PROJECT STRUCTURE
+================================================================================
+olist-analysis/
+│
+├── data/                    # Raw CSV files from Kaggle (not tracked in Git)
+├── sql/                     
+│   └── analysis.sql        # All 4 SQL queries documented
+├── notebooks/               
+│   └── analysis.ipynb      # Python analysis with visualizations
+├── images/                  
+│   ├── revenue_by_category.png
+│   ├── sales_evolution.png
+│   └── revenue_distribution.png
+├── README.md               # Main project documentation (English)
+└── project_notes.txt       # This file
+
+================================================================================
+SETUP INSTRUCTIONS (DETAILED)
+================================================================================
+
+STEP 1: Install MySQL
+---------------------
+1. Download MySQL 8.0 from https://dev.mysql.com/downloads/
+2. Install MySQL Workbench
+3. Set root password during installation
+4. Start MySQL service
+
+STEP 2: Create Database
+-----------------------
+Open MySQL Workbench and run:
+
+    CREATE DATABASE olist;
+    USE olist;
+
+STEP 3: Install Python Dependencies
+-----------------------------------
+Open terminal and run:
+
+    pip install pandas
+    pip install matplotlib
+    pip install seaborn
+    pip install sqlalchemy
+    pip install mysql-connector-python
+    pip install jupyter
+
+STEP 4: Download Dataset
+------------------------
+1. Go to: https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+2. Download all CSV files
+3. Extract to data/ folder
+4. Files needed:
+   - olist_orders_dataset.csv
+   - olist_order_items_dataset.csv
+   - olist_products_dataset.csv
+   - olist_customers_dataset.csv
+   - olist_sellers_dataset.csv
+   - olist_order_payments_dataset.csv
+   - olist_order_reviews_dataset.csv
+   - olist_geolocation_dataset.csv
+
+STEP 5: Import Data to MySQL
+----------------------------
+Run the first cells of notebooks/analysis.ipynb to automatically:
+- Connect to MySQL
+- Create tables
+- Import CSV data
+
+Alternative: Use MySQL Workbench's "Table Data Import Wizard"
+
+STEP 6: Run Analysis
+--------------------
+Execute all cells in notebooks/analysis.ipynb sequentially
+
+================================================================================
+SQL QUERIES SUMMARY
+================================================================================
+
+Query 1: Revenue by Product Category
+------------------------------------
+Purpose: Identify most profitable categories
+Techniques: JOIN, GROUP BY, aggregation
+Key Result: health_beauty leads with R$ 1,258,681.34
+
+Query 2: Top 10 Sellers Performance
+-----------------------------------
+Purpose: Rank sellers by revenue
+Techniques: GROUP BY, ORDER BY, LIMIT
+Key Result: Top seller made R$ 200,472.92
+
+Query 3: Monthly Sales Evolution
+--------------------------------
+Purpose: Identify trends and seasonality
+Techniques: DATE_FORMAT, COUNT DISTINCT, time series
+Key Result: 23 months analyzed, peak in Nov 2017
+
+Query 4: Revenue by Price Range
+-------------------------------
+Purpose: Pricing strategy insights
+Techniques: CASE WHEN, dynamic categorization
+Key Result: Mid-range (R$ 50-200) dominates with 56% of revenue
+
+================================================================================
+KEY FINDINGS & INSIGHTS
+================================================================================
+
+TOP 3 CATEGORIES BY REVENUE:
+1. health_beauty      - R$ 1,258,681.34 (9,670 sales, avg R$ 130.14)
+2. watches_gifts      - R$ 1,205,005.68 (5,991 sales, avg R$ 201.17)
+3. bed_bath_table     - R$ 1,036,988.68 (11,115 sales, avg R$ 93.30)
+
+PRICING STRATEGY:
+- Low (R$ 0-50):       18.9% revenue, highest volume
+- Mid (R$ 50-200):     56.3% revenue, SWEET SPOT ✓
+- High (R$ 200-500):   16.2% revenue
+- Premium (R$ 500+):    8.6% revenue, highest avg ticket (R$ 927.31)
+
+TEMPORAL PATTERNS:
+- 23 months of data (2016-2018)
+- Clear seasonality: November peak (Black Friday)
+- Non-linear growth showing business expansion
+- Average monthly revenue: R$ 591,375.81
+
+================================================================================
+BUSINESS RECOMMENDATIONS
+================================================================================
+
+1. INVEST IN HEALTH_BEAUTY
+   - Best overall performance
+   - Balanced volume + pricing
+   - Action: Increase inventory 20-30%
+
+2. EXPAND PREMIUM SEGMENT (watches_gifts)
+   - Highest average ticket
+   - Luxury/gift opportunity
+   - Action: Launch targeted campaigns
+
+3. OPTIMIZE BED_BATH_TABLE
+   - Highest volume category
+   - Mass-market appeal
+   - Action: Improve operational efficiency
+
+4. FOCUS ON MID-RANGE PRICING
+   - 56% of revenue from R$ 50-200
+   - Best balance accessibility/profitability
+   - Action: Expand offerings in this range
+
+5. PREPARE FOR Q4 SEASONALITY
+   - November spike clearly visible
+   - Action: Stock up 40% for Black Friday
+
+================================================================================
+TECHNICAL NOTES
+================================================================================
+
+Python-MySQL Connection:
+-----------------------
+engine = create_engine('mysql+mysqlconnector://root:PASSWORD@localhost/olist')
+
+Category Translation:
+--------------------
+Portuguese category names in database were translated to English using
+a dictionary mapping for better international presentation.
+
+Example: 'cama_mesa_banho' → 'bed_bath_table'
+
+Chart Styling:
+-------------
+- Style: seaborn-v0_8-darkgrid
+- Palette: husl
+- DPI: 300 (high quality)
+- Format: PNG with transparent background
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+Issue: "Access denied for user 'root'@'localhost'"
+Solution: Check MySQL password in connection string
+
+Issue: "Table doesn't exist"
+Solution: Run data import cells first before queries
+
+Issue: "No module named 'sqlalchemy'"
+Solution: pip install sqlalchemy
+
+Issue: Charts not saving
+Solution: Check if images/ folder exists
+
+Issue: Portuguese categories showing
+Solution: Run translation dictionary cell
+
+================================================================================
+SKILLS DEMONSTRATED
+================================================================================
+
+SQL:
+- Complex JOINs (multi-table queries)
+- Aggregations (COUNT, SUM, AVG, ROUND)
+- GROUP BY with multiple dimensions
+- CASE WHEN for categorization
+- Date functions (DATE_FORMAT)
+- COUNT DISTINCT for accuracy
+- Query optimization
+
+Python:
+- Database connectivity (SQLAlchemy)
+- Data manipulation (Pandas)
+- Data cleaning & transformation
+- Statistical analysis
+- Professional visualizations
+- Code documentation
+- Best practices
+
+Business Intelligence:
+- Insight generation from data
+- Strategic recommendations
+- Revenue analysis
+- Customer segmentation
+- Trend identification
+- Performance metrics
+
+================================================================================
+NEXT STEPS / FUTURE IMPROVEMENTS
+================================================================================
+
+Potential additions:
+- Customer cohort analysis
+- RFM (Recency, Frequency, Monetary) segmentation
+- Geolocation analysis by state/city
+- Payment method analysis
+- Delivery time optimization study
+- Customer review sentiment analysis
+- Seller performance clustering
+- Predictive modeling (sales forecast)
+
+================================================================================
+CONTACT & LINKS
+================================================================================
+
+GitHub: https://github.com/Luiz-mila
+LinkedIn: https://www.linkedin.com/in/luiz-milar%C3%A9-a5869519a/
+Email: luizmilare958@gmail.com
+Location: Paris, France
+
+Languages: Portuguese (Native), French (Fluent), English (Fluent), Italian (Fluent)
+Target Markets: Europe
+
+================================================================================
+LICENSE
+================================================================================
+
+This project is open source and available under the MIT License.
+Dataset provided by Olist Store via Kaggle.
+
+================================================================================
+CHANGELOG
+================================================================================
+
+Version 1.0 - January 2026
+- Initial project completion
+- 4 SQL queries implemented
+- 3 visualizations created
+- Full documentation in English
+- Ready for portfolio presentation
+
+================================================================================
+END OF NOTES
+================================================================================
+```
