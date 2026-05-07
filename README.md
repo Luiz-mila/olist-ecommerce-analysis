@@ -234,9 +234,8 @@ Execute all cells in `notebooks/analysis.ipynb` to recreate charts.
 
 ## 📧 Contact
 
-- **LinkedIn:** https://www.linkedin.com/in/luiz-milar%C3%A9-a5869519a/
-- **Email:** luizmilare958@gmail.com
-- **GitHub:** https://github.com/Luiz-mila
+- **LinkedIn:** www.linkedin.com/in/luiz-milaré/
+- **Email:** milahercu@gmail.com
 - **Location:** Paris, France 🇫🇷
 
 ---
